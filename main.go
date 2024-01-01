@@ -11,9 +11,9 @@ func showHelp() {
 	_ = InitGlobals()
 	fmt.Printf("\nUsage:  grape  [-h]  [-c]  [-i inclusion-list]  [-e exclusion-list]  arg\n\nwhere\n")
 	fmt.Printf("\t-h : This display\n")
-	fmt.Printf("\t-c : Case of alphabetics is ignored (Abc=ABC). Default: Abc != ABC.\n")
-	fmt.Printf("\t-i : List of comma-separated globs to include E.g. '*.go,*.java'. Default: '*' (include every file).\n")
-	fmt.Printf("\t-e : List of comma-separated globs to exclude E.g. '*_test.go,.*'. Default: '' (no exclusions).\n")
+	fmt.Printf("\t-i : The case of alphabetics is ignored (Abc=ABC). Default: Abc != ABC.\n")
+	fmt.Printf("\t-n : List of comma-separated globs to include E.g. '*.go,*.java'. Default: '*' (include every file).\n")
+	fmt.Printf("\t-x : List of comma-separated globs to exclude E.g. '*_test.go,.*'. Default: '' (no exclusions).\n")
 	fmt.Printf("\t-d : Tree-top directory to begin search. Default: current working directory.\n")
 	fmt.Printf("\targ : Fixed string argument to search for (required).\n")
 	ShowExecInfo()
@@ -43,14 +43,14 @@ func main() {
 		case "-h":
 			showHelp()
 
-		case "-c":
+		case "-i":
 			global.caseIgnored = true
 
-		case "-i":
+		case "-n":
 			ii += 1
 			global.incList = strings.Split(Args[ii], ",")
 
-		case "-e":
+		case "-x":
 			ii += 1
 			global.excList = strings.Split(Args[ii], ",")
 
@@ -69,7 +69,7 @@ func main() {
 			global.arg = Args[ii]
 			ii += 1
 			if ii != nargs {
-				croak("main: Something extraneous appears after the search argument: %s", Args[ii])
+				croak("main: Something extraneous appears after the search argument: %s\n", Args[ii])
 			}
 		}
 	}
