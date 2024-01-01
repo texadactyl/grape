@@ -1,5 +1,7 @@
 # grape
-Abbreviated Gnu grep for Windows
+Abbreviated Gnu grep, primarily for Windows.
+
+I created this repository to assist Windows developers who do not wish to install the Gnu toolset on Windows.
 
 ## Installation
 
