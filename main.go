@@ -9,8 +9,9 @@ import (
 // Show help and then exit to the O/S
 func showHelp() {
 	_ = InitGlobals()
-	fmt.Printf("\nUsage:  grape  [-h]  [-i inclusion-list]  [-e exclusion-list]  arg\n\nwhere\n")
+	fmt.Printf("\nUsage:  grape  [-h]  [-c]  [-i inclusion-list]  [-e exclusion-list]  arg\n\nwhere\n")
 	fmt.Printf("\t-h : This display\n")
+	fmt.Printf("\t-c : Case of alphabetics is ignored (Abc=ABC). Default: Abc != ABC.\n")
 	fmt.Printf("\t-i : List of comma-separated globs to include E.g. '*.go,*.java'. Default: '*' (include every file).\n")
 	fmt.Printf("\t-e : List of comma-separated globs to exclude E.g. '*_test.go,.*'. Default: '' (no exclusions).\n")
 	fmt.Printf("\t-d : Tree-top directory to begin search. Default: current working directory.\n")
@@ -41,6 +42,9 @@ func main() {
 
 		case "-h":
 			showHelp()
+
+		case "-c":
+			global.caseIgnored = true
 
 		case "-i":
 			ii += 1

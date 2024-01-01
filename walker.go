@@ -70,7 +70,7 @@ func walker(pathTreeTop string, hitCount, skipCount int) (int, int) {
 		}
 
 		// This file should be scanned.
-		hitCount += scanner(fullPathFile, global.arg)
+		hitCount += scanner(fullPathFile, global.arg, global.caseIgnored)
 	}
 
 	// Processed all entries at this level.

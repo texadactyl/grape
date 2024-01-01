@@ -13,11 +13,12 @@ const VERSION = "1.0.0"
 
 // Definition of the singleton global.
 type GlobalsStruct struct {
-	version string   // Software version string
-	incList []string // Inclusion list of globs
-	excList []string // Exclusion list of globs
-	treeTop string   // Tree top directory to begin walk
-	arg     string   // Search argument
+	version     string   // Software version string
+	incList     []string // Inclusion list of globs
+	excList     []string // Exclusion list of globs
+	treeTop     string   // Tree top directory to begin walk
+	arg         string   // Search argument
+	caseIgnored bool     // Ignore case when scanning
 }
 
 // Here's the singleton.
@@ -58,10 +59,11 @@ func InitGlobals() *GlobalsStruct {
 		croak("InitGlobals: os.Getwd() failed, err:%s\n", err.Error())
 	}
 	global = GlobalsStruct{
-		version: VERSION,
-		incList: []string{"*"},
-		excList: []string{},
-		treeTop: cwd,
+		version:     VERSION,
+		incList:     []string{"*"},
+		excList:     []string{},
+		treeTop:     cwd,
+		caseIgnored: false,
 	}
 	return &global
 }

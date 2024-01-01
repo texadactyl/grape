@@ -9,7 +9,7 @@ import (
 /*
 scanner: Simple scanner to determine whether a search argument is inside a file.
 */
-func scanner(filePath string, searchArg string) int {
+func scanner(filePath string, searchArg string, caseIgnored bool) int {
 	// Get all the bytes of the current selected file
 	dataBytes, err := os.ReadFile(filePath)
 	if err != nil {
@@ -21,10 +21,19 @@ func scanner(filePath string, searchArg string) int {
 
 	// For each string in the file, see if the search argument is present
 	gotAHit := 0
-	for ix, line := range dataStrings {
-		if strings.Index(line, searchArg) > -1 {
+	var argIndex int
+	var lcLine, lcArg string
+	for lineNumber, line := range dataStrings {
+		if caseIgnored {
+			lcLine = strings.ToLower(line)
+			lcArg = strings.ToLower(searchArg)
+			argIndex = strings.Index(lcLine, lcArg)
+		} else {
+			argIndex = strings.Index(line, searchArg)
+		}
+		if argIndex > -1 {
 			line = strings.ReplaceAll(line, "\n", "")
-			fmt.Printf("%s:%d %s\n", filePath, ix+1, line)
+			fmt.Printf("%s:%d %s\n", filePath, lineNumber+1, line)
 			gotAHit = 1
 		}
 	}
