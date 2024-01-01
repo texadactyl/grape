@@ -23,3 +23,17 @@ where
 grape version: x.y.z
 Built with: gox.y.z
 ```
+
+## Example Execution
+
+Suppose one wishes to find the file and line number of every reference to "sql" in all of the "*.java" files in the tree.
+```
+grape -i '*.java' -e 'w*.go' -d ~/sour sql
+
+/home/gherkin/sour/essai/db-sqlite/main.java:1 import java.sql.*;
+/home/gherkin/sour/essai/db-sqlite/main.java:5     static String connUrl = "jdbc:sqlite:../../database/jacotest.db";   // sqlite only
+/home/gherkin/sour/essai/db-sqlite/main.java:6     static String queryString = "SELECT test_case, date_utc, time_utc, result, fail_text FROM history ORDER BY test_case, date_utc DESC, time_utc DESC";   // sqlite only
+main: File hit count: 1
+main: File skip count: 2654
+```
+In this example, only one *.java file contained the string "sql" and a total of 2654 files were skipped because they did not have the ".java" file extension.
