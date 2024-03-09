@@ -9,11 +9,11 @@ import (
 /*
 scanner: Simple scanner to determine whether a search argument is inside a file.
 */
-func scanner(filePath string, searchArg string, caseIgnored bool) int {
+func scanner(fullFilePath string, branchedFile string, searchArg string, caseIgnored bool) int {
 	// Get all the bytes of the current selected file
-	dataBytes, err := os.ReadFile(filePath)
+	dataBytes, err := os.ReadFile(fullFilePath)
 	if err != nil {
-		croak("scanner: os.ReadFile(%s) failed, err:%s\n", filePath, err)
+		croak("scanner: os.ReadFile(%s) failed, err:%s\n", fullFilePath, err)
 	}
 
 	// Convert bytes into an array of strings
@@ -33,7 +33,7 @@ func scanner(filePath string, searchArg string, caseIgnored bool) int {
 		}
 		if argIndex > -1 {
 			line = strings.ReplaceAll(line, "\n", "")
-			fmt.Printf("%s:%d %s\n", filePath, lineNumber+1, line)
+			fmt.Printf("%s:%d %s\n", branchedFile, lineNumber+1, line)
 			gotAHit = 1
 		}
 	}

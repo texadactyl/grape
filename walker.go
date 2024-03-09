@@ -25,7 +25,7 @@ Obey the inclusion list (global.incList).
 Obey the exclusion list (global.excList).
 Scan all qualifying files for the argument (global.arg).
 */
-func walker(pathTreeTop string, hitCount, skipCount int) (int, int) {
+func walker(pathTreeTop, argBranch string, hitCount, skipCount int) (int, int) {
 
 	// Get pointer to global definitions.
 	global := GetGlobalRef()
@@ -54,7 +54,8 @@ func walker(pathTreeTop string, hitCount, skipCount int) (int, int) {
 		// If this is a subdirectory entry, it needs special handling.
 		if fileInfo.IsDir() {
 			// Recur.
-			hitCount, skipCount = walker(fullPathFile, hitCount, skipCount)
+			wbranch := filepath.Join(argBranch, baseName)
+			hitCount, skipCount = walker(fullPathFile, wbranch, hitCount, skipCount)
 			continue
 		}
 
@@ -71,7 +72,8 @@ func walker(pathTreeTop string, hitCount, skipCount int) (int, int) {
 		}
 
 		// This file should be scanned.
-		hitCount += scanner(fullPathFile, global.arg, global.caseIgnored)
+		wbranch := filepath.Join(argBranch, baseName)
+		hitCount += scanner(fullPathFile, wbranch, global.arg, global.caseIgnored)
 	}
 
 	// Processed all entries at this level.

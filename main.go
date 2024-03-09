@@ -76,7 +76,7 @@ func main() {
 
 	hitCount := 0
 	skipCount := 0
-	hitCount, skipCount = walker(global.treeTop, hitCount, skipCount)
-	fmt.Printf("main: File hit count: %d\n", hitCount)
-	fmt.Printf("main: File skip count: %d\n", skipCount)
+	hitCount, skipCount = walker(global.treeTop, "", hitCount, skipCount)
+	fmt.Printf("\nTotal file hit count: %d\n", hitCount)
+	fmt.Printf("Total file skip count: %d\n", skipCount)
 }
