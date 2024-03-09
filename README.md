@@ -14,13 +14,13 @@ go install (preferred) or go build into a directory in the PATH
 ## Help
 
 ```
-Usage:  grape  [-h]  [-c]  [-i inclusion-list]  [-e exclusion-list]  arg
+Usage:  grape  [-h]  [-i]  [-n inclusion-list]  [-x exclusion-list]  [-d directory]  arg
 
 where
 	-h : This display
-        -c : Case of alphabetics is ignored (Abc=ABC). Default: Abc != ABC.
-	-i : List of comma-separated globs to include E.g. '*.go,*.java'. Default: '*' (include every file).
-	-e : List of comma-separated globs to exclude E.g. '*_test.go,.*'. Default: '' (no exclusions).
+	-i : The case of alphabetics is ignored (Abc=ABC). Default: Abc != ABC.
+	-n : List of comma-separated globs to include E.g. '*.go,*.java'. Default: '*' (include every file).
+	-x : List of comma-separated globs to exclude E.g. '*_test.go,.*'. Default: '' (no exclusions).
 	-d : Tree-top directory to begin search. Default: current working directory.
 	arg : Fixed string argument to search for (required).
 grape version: x.y.z
