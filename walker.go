@@ -55,6 +55,7 @@ func walker(pathTreeTop string, hitCount, skipCount int) (int, int) {
 		if fileInfo.IsDir() {
 			// Recur.
 			hitCount, skipCount = walker(fullPathFile, hitCount, skipCount)
+			continue
 		}
 
 		// Exclude it?
